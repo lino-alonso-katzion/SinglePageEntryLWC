@@ -1,0 +1,19 @@
+<template>
+    <div if:true={toastFlag} class="alertclass" style="height:4rem">
+        <div class="slds-notify_container " style="top:auto">
+            <div class={theme} role="status">
+                <span class={iconTheme} title="Description of icon when needed">
+                    <lightning-icon icon-name={icon} alternative-text={assertText} variant="inverse" ></lightning-icon>
+                </span>
+                <div class="slds-notify__content">
+                    <h2 class="slds-text-heading_small ">{toastMsg}</h2>
+                </div> 
+                <div class="slds-notify__close">
+                    <button class="slds-button slds-button_icon slds-button_icon-inverse" title="Close" onclick={closeToast}>
+                        <lightning-icon icon-name="utility:close" variant="inverse" alternative-text="close" ></lightning-icon>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+</template>

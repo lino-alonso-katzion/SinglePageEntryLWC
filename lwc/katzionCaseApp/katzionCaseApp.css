@@ -1,0 +1,9 @@
+.h1Style{
+    font-weight: bolder;
+    font-size: 2em;
+    text-decoration: underline;
+}
+
+.hidemodel{
+    display: none;
+}

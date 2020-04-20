@@ -1,0 +1,29 @@
+<template>
+    <c-is-alert-comp data-id="alertbox" ></c-is-alert-comp>
+    
+    <div style="margin-bottom:10em">
+
+        <lightning-card > 
+            <div class="slds-align_absolute-center" style="margin:1em 0 1em 0">
+                <span if:true={cssDisplay} style="position:fixed;width:100%;height:100%;top:0;left:0;z-index:999">
+                    <div id="spinnerDiv" class="demo-only demo--inverse" style="height: 10rem">
+                    <div class="slds-spinner_container">
+                        <div role="status" class="slds-spinner slds-spinner_medium">
+                            <span class="slds-assistive-text">Loading</span>
+                            <div class="slds-spinner__dot-a"></div>
+                            <div class="slds-spinner__dot-b"></div>
+                        </div>
+                    </div>
+                    </div>
+                </span>
+                <lightning-button variant="brand" label="Save" title="Save" onclick={saveCaseRecord} class="slds-m-left_x-small"></lightning-button>
+            </div>
+            <div style="margin:1em 0 1em 0;">
+                <c-case-comp data-id="CaseComp" case-active-tabs={caseActiveTabs}></c-case-comp>
+            </div>
+            <div class="slds-align_absolute-center" style="margin:1em 0 1em 0">
+                <lightning-button variant="brand" label="Save" title="Save" onclick={saveCaseRecord} class="slds-m-left_x-small"></lightning-button>
+            </div>
+        </lightning-card>
+    </div>  
+</template>

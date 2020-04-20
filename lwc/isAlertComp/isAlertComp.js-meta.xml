@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<LightningComponentBundle xmlns="urn:metadata.tooling.soap.sforce.com" fqn="isAlertComp">
+    <apiVersion>46.0</apiVersion>
+    <isExposed>true</isExposed>
+    <targets>
+        <target>lightning__AppPage</target>
+        <target>lightning__HomePage</target>
+        <target>lightning__RecordPage</target>
+        <target>lightningCommunity__Page</target>
+        <target>lightningCommunity__Default</target>
+    </targets>
+    <!--<targetConfigs>
+        <targetConfig targets="lightningCommunity__Default">
+            <property name="string" type="String" default="jsMetaValue"></property>
+            <property name="boolean" type="Boolean" default="true"></property>
+            <property name="integer" type="Integer" default="5"></property>
+            <property name="picklist" type="String" default="value3" datasource="value1,value2,value3" />
+        </targetConfig>
+    </targetConfigs>--></LightningComponentBundle>

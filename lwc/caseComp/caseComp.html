@@ -1,0 +1,169 @@
+<template>
+    <template if:true={caseObj}>
+        <div class="slds-align_absolute-center">
+            <h1 class="h1Style">New Case</h1>
+        </div>
+
+
+        <lightning-accordion allow-multiple-sections-open  active-section-name={caseActiveTabs}>
+            <lightning-accordion-section name="CaseInformation" label="Case Information">
+                <lightning-layout>
+                    <lightning-layout-item class="itm">
+                        <lightning-combobox data-id="RecordType" label="Record Type" 
+                                    name="recordType" 
+                                    onchange={handleRTChange} 
+                                    options={options} 
+                                    placeholder="--None--" 
+                                    value={selectedRT}></lightning-combobox>
+                    </lightning-layout-item>
+                    <lightning-layout-item class="itm">
+                        <lightning-combobox data-id="Type" 
+                                            label="Type" 
+                                            name="Type" 
+                                            placeholder="--None--" 
+                                            value={selectedType} 
+                                            options={dependentValues}></lightning-combobox>
+                    </lightning-layout-item>
+                </lightning-layout>
+
+                <lightning-layout>
+                    <lightning-layout-item class="itm">
+                        <lightning-input required value="" data-id="Subject" maxlength="255" label="Subject" title="Subject" placeholder="Subject"  type="text" onchange={handleSubjectChange}></lightning-input>
+                    </lightning-layout-item>
+                    <lightning-layout-item class="itm">
+                        <lightning-combobox data-id="Priority" label="Priority" name="Priority" value="Medium" options={PriorityOptions}></lightning-combobox>
+                    </lightning-layout-item>
+                </lightning-layout>
+                <lightning-layout>
+                    <lightning-layout-item class="itm">
+                        <lightning-textarea label="Description" data-id="Description"></lightning-textarea>
+                    </lightning-layout-item>
+                </lightning-layout>
+            </lightning-accordion-section>
+
+            <lightning-accordion-section name="CaseFiles" label="Case Files">
+                <c-custom-File-Uploader subject={subject}></c-custom-File-Uploader>
+            </lightning-accordion-section>
+            
+            <lightning-accordion-section name="BorrowerAccountInformation" label="Borrower Account Information">
+                
+
+                <lightning-layout>
+                    <lightning-layout-item class="itm">
+                        <c-lookup-comp object-name="Account" data-id="BorrowerAccountLookup" display-name="Borrower Account" onlookupid={populateDetails} ></c-lookup-comp>
+                    </lightning-layout-item>
+                   
+                </lightning-layout>
+                
+                
+                
+                
+                
+                <lightning-layout>
+                    <lightning-layout-item class="itm">
+                        <lightning-input required value={accountName} data-id="BorrowerAccount" label="Borrower Account" title="Borrower Account" placeholder="Borrower Account" type="text" max-length="50"></lightning-input>
+                    </lightning-layout-item>
+                    <lightning-layout-item class="itm">
+                        <lightning-input value={accountPhone} data-id="BorrowerAccountPhone"  label="Phone" title="Phone" placeholder="Phone"  type="text" max-length="100"></lightning-input>
+                    </lightning-layout-item>
+                </lightning-layout>
+                <lightning-layout>
+                    <lightning-layout-item class="itm">
+                        <lightning-input value={accountABN} data-id="BorrowerAccountABN"  label="ABN" title="ABN" placeholder="ABN"  type="text" max-length="100"></lightning-input>
+                    </lightning-layout-item>
+                    <lightning-layout-item class="itm">
+                        <lightning-input value={accountACN} data-id="BorrowerAccountACN"  label="ACN" title="ACN" placeholder="ACN"  type="text" max-length="100"></lightning-input>
+                    </lightning-layout-item>
+                </lightning-layout>
+                <lightning-layout>
+                    <lightning-layout-item class="itm">
+                        <lightning-textarea value={accountStreet} label="Street" data-id="BorrowerAccountStreet"></lightning-textarea>
+                    </lightning-layout-item>
+                    <lightning-layout-item class="itm">
+                        <lightning-input value={accountCity} data-id="BorrowerAccountCity"  label="City" title="City" placeholder="City"  type="text" max-length="100"></lightning-input>
+                    </lightning-layout-item>
+                </lightning-layout>
+                <lightning-layout>
+                    <lightning-layout-item class="itm">
+                        <lightning-input value={accountState} data-id="BorrowerAccountState"  label="State" title="State" placeholder="State"  type="text" max-length="100"></lightning-input>
+                    </lightning-layout-item>
+                    <lightning-layout-item class="itm">
+                        <lightning-input value={accountPostalCode} data-id="BorrowerAccountPostalCode"  label="Postal Code" title="Postal Code" placeholder="Postal Code"  type="text" max-length="5"></lightning-input>
+                    </lightning-layout-item>
+                </lightning-layout>
+                <lightning-layout>
+                    <lightning-layout-item class="itm">
+                        <lightning-input value={accountCountry} data-id="BorrowerAccountCountry"  label="Country" title="Country" placeholder="Country"  type="text" max-length="100"></lightning-input>
+                    </lightning-layout-item>
+                    <lightning-layout-item class="itm"></lightning-layout-item>
+                </lightning-layout>
+            </lightning-accordion-section>
+            <lightning-accordion-section name="BorrowerContactInformation" label="Borrower Contact Information">
+                
+                <lightning-layout>
+                    <lightning-layout-item class="itm">
+                        <c-lookup-comp object-name="Contact" data-id="BorrowerContactLookup" display-name="Borrower Contact" onlookupid={populateContactDetails} ></c-lookup-comp>
+                    </lightning-layout-item>
+                    
+                </lightning-layout>
+                
+                
+                
+                
+                <lightning-layout>
+                    <lightning-layout-item class="itm">
+                        <lightning-input value={contactFirstName} data-id="BorrowerContactFirstName"  label="First Name" title="First Name" placeholder="First Name"  type="text" max-length="50" onchange={handleContactData}></lightning-input>
+                    </lightning-layout-item>
+                    <lightning-layout-item class="itm">
+                        <lightning-input required value={contactLastName} data-id="BorrowerContactLastName" label="Last Name" title="Last Name" placeholder="Last Name"  type="text" max-length="50" onchange={handleContactData}></lightning-input>
+                    </lightning-layout-item>
+                </lightning-layout>
+                <lightning-layout>
+                    <lightning-layout-item class="itm">
+                        <lightning-input value={contactEmail} data-id="BorrowerContactEmail"  label="Email" title="Email" placeholder="Email"  type="email" ></lightning-input>
+                    </lightning-layout-item>
+                    <lightning-layout-item class="itm">
+                        <lightning-input value={contactPhone} data-id="BorrowerContactPhone"  label="Phone" title="Phone" placeholder="Phone"  type="text" max-length="100"></lightning-input>
+                    </lightning-layout-item>
+                </lightning-layout>
+                <lightning-layout>
+                    <lightning-layout-item class="itm">
+                        <lightning-input value={contactMobilePhone} data-id="BorrowerContactMobile"  label="Mobile" title="Mobile" placeholder="Mobile"  type="text" max-length="100"></lightning-input>
+                    </lightning-layout-item>
+                    <lightning-layout-item class="itm">
+                        <lightning-input value={contactBirthdate} data-id="BorrowerBirthDate"  label="BirthDate" title="BirthDate" placeholder="BirthDate"  type="date" ></lightning-input>
+                    </lightning-layout-item>
+                </lightning-layout>
+                <lightning-layout>
+                    <lightning-layout-item class="itm">
+                        <lightning-textarea value={contactStreet} label="Street" data-id="BorrowerContactStreet"></lightning-textarea>
+                    </lightning-layout-item>
+                    <lightning-layout-item class="itm">
+                        <lightning-input value={contactCity} data-id="BorrowerContactCity"  label="City" title="City" placeholder="City"  type="text" max-length="100"></lightning-input>
+                    </lightning-layout-item>
+                </lightning-layout>
+                <lightning-layout>
+                    <lightning-layout-item class="itm">
+                        <lightning-input value={contactState} data-id="BorrowerContactState"  label="State" title="State" placeholder="State"  type="text" max-length="100"></lightning-input>
+                    </lightning-layout-item>
+                    <lightning-layout-item class="itm">
+                        <lightning-input value={contactPostalCode} data-id="BorrowerContactPostalCode"  label="Postal Code" title="Postal Code" placeholder="Postal Code"  type="text" max-length="5"></lightning-input>
+                    </lightning-layout-item>
+                </lightning-layout>
+                <lightning-layout>
+                    <lightning-layout-item class="itm">
+                        <lightning-input value={contactCountry} data-id="BorrowerContactCountry"  label="Country" title="Country" placeholder="Country"  type="text" max-length="100"></lightning-input>
+                    </lightning-layout-item>
+                    <lightning-layout-item class="itm"></lightning-layout-item>
+                </lightning-layout>
+            </lightning-accordion-section>
+        </lightning-accordion>
+
+        <div class="slds-align_absolute-center" style="margin: 1em 0 1em 0;background: #f9f9f9;padding: 1em;">
+            <lightning-button variant="brand" label="New Loan" title="New Loan" onclick={createNewLoan} class="slds-m-left_x-small"></lightning-button>
+        </div>
+        <template  for:each={LoanArr} for:item="loan">
+            <c-loan-comp loan-installment-frequency-options={LoanInstallmentFrequencyOptions} loan-intrest-type-options={LoanIntrestTypeOptions} loan-type-options={LoanTypeOptions} loan-rec={loan} key={loan.LoanId} id={LoanId} data-id={loan.LoanId} loan-contact-role-options={LoanContactRoleOptions} asset-record-type-options={AssetRecordTypeOptions} onremoveloan={deleteLoan} go-data={goData} go-bol={goBol} ></c-loan-comp>
+        </template>
+    </template>
+</template>

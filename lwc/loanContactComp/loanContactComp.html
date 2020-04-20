@@ -1,0 +1,32 @@
+<template>
+    <template if:true={loanContact}>
+
+        <header class="slds-media slds-media_center slds-has-flexi-truncate" style="padding:1em">
+            <div class="slds-media__figure">
+                <lightning-icon icon-name="standard:task" size="medium" alternative-text='loanicon'></lightning-icon>
+            </div>
+            <div class="slds-media__body">
+                <h2 class="slds-card__header-title">
+                    <a href="javascript:void(0);" class="slds-card__header-link slds-truncate" >
+                        <span>{loanContact.LoanContactName}</span>
+                    </a>
+                </h2>
+            </div>
+            <div class="slds-media__figure" style="cursor:pointer">
+                <lightning-icon icon-name="standard:first_non_empty" size="medium" alternative-text='loanDelete' onclick={deleteComp} ></lightning-icon>
+            </div>
+        </header>
+        
+        <lightning-layout>
+            <lightning-layout-item class="itm">
+                <div style="display: flex; justify-content: space-between;">
+                    <abbr title="required" class="slds-required">*</abbr> <c-lookup-comp lookup-creation={lookupcreation} object-name="Contact" data-id="LoanContactContact" display-name="Contact" go-data={goData} go-bol={goBol} ></c-lookup-comp>
+                </div>  
+                
+            </lightning-layout-item>
+            <lightning-layout-item class="itm">
+                <lightning-combobox required data-id="LoanContactRole" label="Role" name="Role"  options={loanContactRoleOptions}></lightning-combobox>
+            </lightning-layout-item>
+        </lightning-layout>
+    </template>
+</template>

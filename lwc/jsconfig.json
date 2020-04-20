@@ -1,0 +1,62 @@
+{
+    "compilerOptions": {
+        "baseUrl": ".",
+        "paths": {
+            "c/assetComp": [
+                "assetComp/assetComp.js"
+            ],
+            "c/caseApp1": [
+                "caseApp1/caseApp1.js"
+            ],
+            "c/caseComp": [
+                "caseComp/caseComp.js"
+            ],
+            "c/isAlertComp": [
+                "isAlertComp/isAlertComp.js"
+            ],
+            "c/katzionCaseApp": [
+                "katzionCaseApp/katzionCaseApp.js"
+            ],
+            "c/loanComp": [
+                "loanComp/loanComp.js"
+            ],
+            "c/loanContactComp": [
+                "loanContactComp/loanContactComp.js"
+            ],
+            "c/lookupComp": [
+                "lookupComp/lookupComp.js"
+            ],
+            "c/lookupResult": [
+                "lookupResult/lookupResult.js"
+            ],
+            "c/miscNotification": [
+                "miscNotification/miscNotification.js"
+            ],
+            "c/taskComp": [
+                "taskComp/taskComp.js"
+            ],
+            "c/viewSource": [
+                "viewSource/viewSource.js"
+            ],
+            "c/lookupNewCreation": [
+                "lookupNewCreation/lookupNewCreation.js"
+            ],
+            "c/customFileUploader": [
+                "customFileUploader/customFileUploader.js"
+            ],
+            "c/fileUploader": [
+                "fileUploader/fileUploader.js"
+            ]
+        },
+        "experimentalDecorators": true
+    },
+    "include": [
+        "**/*",
+        "../../.sfdx/typings/lwc/**/*.d.ts"
+    ],
+    "typeAcquisition": {
+        "include": [
+            "jest"
+        ]
+    }
+}

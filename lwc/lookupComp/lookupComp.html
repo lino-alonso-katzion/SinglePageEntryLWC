@@ -1,0 +1,72 @@
+<template>
+    <div onmouseleave={onblur} data-id="searchRes" class="slds-form-element slds-lookup slds-is-close" >
+        <label class="slds-form-element__label" for="lookup-348">Search {displayName}</label>
+        <div class="slds-form-element__control">
+            <div class="slds-input-has-icon slds-input-has-icon--right">
+                <template if:true={selectedRecord}>
+                    <div data-id="lookup-pill" class="slds-pill-container ">
+                        <lightning-pill class="pillSize" label={selectedRecord.Name} name={selectedRecord.Name} onremove={clear}>
+                        </lightning-pill>
+                    </div>
+                </template>
+                <template if:false={selectedRecord}>
+                    <div data-id="lookupField" class="slds-show">
+                        <lightning-icon class="slds-input__icon slds-show" icon-name="utility:search" size="x-small" alternative-text="search"></lightning-icon>
+                        <span class="slds-icon_container  slds-combobox__input-entity-icon" title="record">
+                            <lightning-icon class="slds-icon slds-icon slds-icon_small slds-icon-text-default" icon-name="standard:account" size="x-small" alternative-text="icon"></lightning-icon>
+                        </span>
+                        <input  onclick={onfocus} data-id="SearchText" style={alertStyle}  onkeyup={keyPressController} class="slds-lookup__search-input slds-input leftPaddingClass"  placeholder="search.."/>
+                        <template if:true={shwalert}>
+                            <div style="color:red;position:absolute">{alertmsg}</div>
+                        </template>
+                        
+                    </div>
+                </template>
+            </div>
+        </div>
+        <template if:false={selectedRecord}>
+            <template if:true={showList}>
+                <template if:true={lookupCreation}>
+                    <div style="min-height: 40px;max-height: 100px;display: block;" class="slds-listbox slds-listbox_vertical slds-dropdown slds-dropdown_fluid slds-lookup__menu slds">
+                        <div style="z-index: 7000;padding:.5em;cursor:pointer;display:flex;background:#e8fdfd" onclick={createLookupData}>
+                            
+                            <lightning-icon style="margin-right:.8em" class="slds-input__icon slds-show" icon-name="utility:add" size="x-small" alternative-text="search"></lightning-icon>    
+                            Create New {objectName}
+                        
+                        </div>
+                        
+                        <ul style="border-top:none;min-height:40px;max-height:100px;margin-top:0px !important;display:block;overflow-y:auto;" class="slds-listbox slds-listbox_vertical slds-dropdown slds-dropdown_fluid slds-lookup__menu slds" role="listbox">
+                            <template if:true={spinner}>
+                                <lightning-spinner  variant="brand" size="small" data:id="mySpinner"></lightning-spinner>
+                            </template>
+                            <template if:true={Message}>
+                                <center>{Message}</center>
+                            </template>
+                            <template for:each={RecordList} for:item="item">
+                                <c-lookup-result key={item.Id} id={item.Id} data-id={item.Id} record={item} onclick={onselectData} ></c-lookup-result>
+                            </template>
+                        </ul>
+                    </div>
+                </template>
+                <template if:false={lookupCreation}>
+                    <ul style="min-height:40px;max-height:100px;margin-top:0px !important;display:block;overflow-y:auto;" class="slds-listbox slds-listbox_vertical slds-dropdown slds-dropdown_fluid slds-lookup__menu slds" role="listbox">
+                        <template if:true={spinner}>
+                            <lightning-spinner  variant="brand" size="small" data:id="mySpinner"></lightning-spinner>
+                        </template>
+                        <template if:true={Message}>
+                            <center>{Message}</center>
+                        </template>
+                        <template for:each={RecordList} for:item="item">
+                            <c-lookup-result key={item.Id} id={item.Id} data-id={item.Id} record={item} onclick={onselectData} oncontactrecord={populateNewContact} ></c-lookup-result>
+                        </template>
+                    </ul>
+                </template>
+                
+            </template>
+        </template>
+    </div>
+    <template if:true={LookupNewCreation}>
+        <c-lookup-new-creation oncancelrecord={cancelWindow}></c-lookup-new-creation>
+    </template>
+    
+</template>

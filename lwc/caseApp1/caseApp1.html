@@ -1,0 +1,24 @@
+<template>
+    <c-is-alert-comp data-id="alertbox" ></c-is-alert-comp>
+    <lightning-card>
+        <div class="slds-align_absolute-center" if:false={newRecord}>
+            <lightning-button variant="brand" label="New Case" title="New Case" onclick={newAccountRecord} class="slds-m-left_x-small"></lightning-button>
+        </div>
+        <div if:true={newRecord}>
+            <h1 class="slds-align_absolute-center h1Style" >New Account Details</h1>
+            <c-case-comp data-id="AccountComp"></c-case-comp>
+            <template for:each={tasks} for:item="tsk" >
+                <div key={tsk.taskId}>
+                    <c-task-comp data-id={tsk.taskId} tsk={tsk} user-list={UserMap} task-data={TaskData} current-user={CurrentUser} onremovetaskinfo={removeTask}></c-task-comp>
+                </div>    
+            </template>
+            <div class="slds-align_absolute-center" >
+                <lightning-button variant="brand" label="Add New Task" title="Add New Task" onclick={addNewTask} class="slds-m-left_x-small"></lightning-button>
+                <lightning-button variant="neutral" label="Cancel" title="Cancel" onclick={cancelAccountRecord} class="slds-m-left_x-small"></lightning-button>
+                <lightning-button variant="brand" label="Save" title="Save" onclick={saveAccountDetails} class="slds-m-left_x-small"></lightning-button>
+            </div>
+        </div>
+    </lightning-card> 
+
+    <c-lookup-comp object-name="User" ></c-lookup-comp>
+</template>

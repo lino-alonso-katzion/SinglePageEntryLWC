@@ -1,0 +1,71 @@
+<template>
+    <article class="slds-card">
+        <div class="slds-card__header slds-grid">
+            <header class="slds-media slds-media_center slds-has-flexi-truncate">
+                <div class="slds-media__figure">
+                    <lightning-icon icon-name="standard:task" size="medium" alternative-text={tsk.Name}></lightning-icon>
+                </div>
+                <div class="slds-media__body">
+                    <h2 class="slds-card__header-title">
+                        <a href="javascript:void(0);" class="slds-card__header-link slds-truncate" title={tsk.Name}>
+                            <span>{tsk.Name}</span>
+                        </a>
+                    </h2>
+                </div>
+                <div class="slds-media__figure" style="cursor:pointer">
+                    <lightning-icon icon-name="standard:first_non_empty" size="medium" alternative-text={tsk.Name} onclick={removeData} id={tsk.taskId}></lightning-icon>
+                </div>
+            </header>
+        </div>
+        <div class="slds-card__body slds-card__body_inner">
+            <lightning-layout>
+                <lightning-layout-item class="itm">
+                    <lightning-input value="" data-id="Subject" maxlength="50" label="Subject" title="Subject" placeholder="Subject"  type="text"></lightning-input>
+                </lightning-layout-item>
+                <lightning-layout-item class="itm"></lightning-layout-item>
+            </lightning-layout>
+            <lightning-layout>
+                <lightning-layout-item class="itm">
+                    <label class="slds-form-element__label" >Priority</label>
+                    <div class="slds-form-element__control">
+                        <div class="slds-select_container">
+                            <select class="slds-select" data-id="Priority">
+                                <template for:each={taskData.data.PriorityPicklistValues} for:item="data" for:index="slno">
+                                    <option key={data} value={data}>{data}</option>
+                                </template>
+                            </select>
+                        </div>
+                    </div>
+                </lightning-layout-item>
+                <lightning-layout-item class="itm">
+                    <label class="slds-form-element__label" >Status</label>
+                    <div class="slds-form-element__control">
+                        <div class="slds-select_container">
+                            <select class="slds-select" id="Status" data-id="Status" >
+                                <template for:each={taskData.data.StatusPicklistValues} for:item="data" for:index="slno">
+                                    <option key={data} value={data}>{data}</option>
+                                </template>
+                            </select>
+                        </div>
+                    </div>
+                </lightning-layout-item>
+            </lightning-layout>
+
+
+            <lightning-layout>
+                <lightning-layout-item class="itm">
+                    <label class="slds-form-element__label" >Assign To</label>
+                    <div class="slds-form-element__control">
+                        <div class="slds-select_container">
+                            <select class="slds-select" data-id="AssignTo" >
+                                <template for:each={userList.data} for:item="user" for:index="slno">
+                                    <option key={user.Id} value={user.Id}>{user.Name}</option>
+                                </template>
+                            </select>
+                        </div>
+                    </div>
+                </lightning-layout-item>
+            </lightning-layout>
+        </div>
+    </article>
+</template>

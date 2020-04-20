@@ -1,0 +1,64 @@
+<template>
+    <section role="dialog" tabindex="-1" aria-labelledby="modal-heading-01" aria-modal="true" aria-describedby="modal-content-id-1" class="slds-modal slds-fade-in-open">
+        <div class="slds-modal__container">
+            <header class="slds-modal__header">
+                <h2 id="modal-heading-01" class="slds-modal__title slds-hyphenate">New Contact</h2>
+            </header>
+            <div class="slds-modal__content slds-p-around_medium" id="modal-content-id-1">
+            
+            <lightning-layout>
+                <lightning-layout-item class="itm">
+                    <lightning-input value={contactFirstName} data-id="BorrowerContactFirstName"  label="First Name" title="First Name" placeholder="First Name"  type="text" max-length="50" onchange={handleContactData}></lightning-input>
+                </lightning-layout-item>
+                <lightning-layout-item class="itm">
+                    <lightning-input value={contactLastName} data-id="BorrowerContactLastName" label="Last Name" title="Last Name" placeholder="Last Name"  type="text" max-length="50" onchange={handleContactData}></lightning-input>
+                </lightning-layout-item>
+            </lightning-layout>
+            <lightning-layout>
+                <lightning-layout-item class="itm">
+                    <lightning-input value={contactEmail} data-id="BorrowerContactEmail"  label="Email" title="Email" placeholder="Email"  type="email" ></lightning-input>
+                </lightning-layout-item>
+                <lightning-layout-item class="itm">
+                    <lightning-input value={contactPhone} data-id="BorrowerContactPhone"  label="Phone" title="Phone" placeholder="Phone"  type="text" max-length="100"></lightning-input>
+                </lightning-layout-item>
+            </lightning-layout>
+            <lightning-layout>
+                <lightning-layout-item class="itm">
+                    <lightning-input value={contactMobilePhone} data-id="BorrowerContactMobile"  label="Mobile" title="Mobile" placeholder="Mobile"  type="text" max-length="100"></lightning-input>
+                </lightning-layout-item>
+                <lightning-layout-item class="itm">
+                    <lightning-input value={contactBirthdate} data-id="BorrowerBirthDate"  label="BirthDate" title="BirthDate" placeholder="BirthDate"  type="date" ></lightning-input>
+                </lightning-layout-item>
+            </lightning-layout>
+            <lightning-layout>
+                <lightning-layout-item class="itm">
+                    <lightning-textarea value={contactStreet} label="Street" data-id="BorrowerContactStreet"></lightning-textarea>
+                </lightning-layout-item>
+                <lightning-layout-item class="itm">
+                    <lightning-input value={contactCity} data-id="BorrowerContactCity"  label="City" title="City" placeholder="City"  type="text" max-length="100"></lightning-input>
+                </lightning-layout-item>
+            </lightning-layout>
+            <lightning-layout>
+                <lightning-layout-item class="itm">
+                    <lightning-input value={contactState} data-id="BorrowerContactState"  label="State" title="State" placeholder="State"  type="text" max-length="100"></lightning-input>
+                </lightning-layout-item>
+                <lightning-layout-item class="itm">
+                    <lightning-input value={contactPostalCode} data-id="BorrowerContactPostalCode"  label="Postal Code" title="Postal Code" placeholder="Postal Code"  type="text" max-length="5"></lightning-input>
+                </lightning-layout-item>
+            </lightning-layout>
+            <lightning-layout>
+                <lightning-layout-item class="itm">
+                    <lightning-input value={contactCountry} data-id="BorrowerContactCountry"  label="Country" title="Country" placeholder="Country"  type="text" max-length="100"></lightning-input>
+                </lightning-layout-item>
+                <lightning-layout-item class="itm"></lightning-layout-item>
+            </lightning-layout>
+
+           </div>
+            <footer class="slds-modal__footer">
+                <button class="slds-button slds-button_neutral" onclick={cancelWindow}>Cancel</button>
+                <button class="slds-button slds-button_brand" onclick={saveContactRecord}>Save</button>
+            </footer>
+        </div>
+    </section>
+    <div class="slds-backdrop slds-backdrop_open"></div>
+</template>

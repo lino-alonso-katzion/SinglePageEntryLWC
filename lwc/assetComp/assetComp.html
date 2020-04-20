@@ -1,0 +1,54 @@
+<template>
+    <template if:true={asset}>
+
+        <header class="slds-media slds-media_center slds-has-flexi-truncate" style="padding:1em">
+            <div class="slds-media__figure">
+                <lightning-icon icon-name="standard:task" size="medium" alternative-text='assetIcon'></lightning-icon>
+            </div>
+            <div class="slds-media__body">
+                <h2 class="slds-card__header-title">
+                    <a href="javascript:void(0);" class="slds-card__header-link slds-truncate" >
+                        <span>{asset.AssetName}</span>
+                    </a>
+                </h2>
+            </div>
+            <div class="slds-media__figure" style="cursor:pointer">
+                <lightning-icon icon-name="standard:first_non_empty" size="medium" alternative-text='assetClose' onclick={deleteComp} ></lightning-icon>
+            </div>
+        </header>
+        
+        <lightning-layout>
+            <lightning-layout-item class="itm">
+                <lightning-input required value="" data-id="AssetName"  label="Asset Name" title="Asset Name" placeholder="Asset Name"  type="text"></lightning-input>
+            </lightning-layout-item>
+            <lightning-layout-item class="itm">
+                <lightning-combobox required data-id="AssetRecordType" label="RecordType" name="RecordType"  options={assetRecordTypeOptions}></lightning-combobox>
+            </lightning-layout-item>
+        </lightning-layout>
+        <lightning-layout>
+            <lightning-layout-item class="itm">
+                <lightning-input value="" data-id="AssetRegistrationNo"  label="Registration Number" title="Registration Number" placeholder="Registration Number"  type="text"></lightning-input>
+            </lightning-layout-item>
+            <lightning-layout-item class="itm">
+                <lightning-input value="" data-id="AssetEngineNo"  label="Engine Number" title="Engine Number" placeholder="Engine Number"  type="text"></lightning-input>
+            </lightning-layout-item>
+        </lightning-layout>
+        <lightning-layout>
+            <lightning-layout-item class="itm">
+                <lightning-input type="date" data-id="AssetBuildDate" name="Build Date" label="Build Date" ></lightning-input>
+            </lightning-layout-item>
+            <lightning-layout-item class="itm">
+                <lightning-input value="" data-id="AssetColour"  label="Colour" title="Colour" placeholder="Colour"  type="text"></lightning-input>
+            </lightning-layout-item>
+        </lightning-layout>
+        <lightning-layout>
+            <lightning-layout-item class="itm">
+                <lightning-textarea label="Description" data-id="AssetDescription"></lightning-textarea>
+            </lightning-layout-item>
+            <lightning-layout-item class="itm">
+                <lightning-input required value="" data-id="AssetVIN"  label="VIN" title="VIN" placeholder="VIN"  type="text"></lightning-input>
+            </lightning-layout-item>
+        </lightning-layout>
+        
+    </template>
+</template>

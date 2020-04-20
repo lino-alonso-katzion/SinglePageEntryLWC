@@ -1,0 +1,141 @@
+<template>
+    
+    <template if:true={loanRec}>
+        
+        
+        
+        <header class="slds-media slds-media_center slds-has-flexi-truncate" style="padding:1em">
+            <div class="slds-media__figure">
+                <lightning-icon icon-name="standard:task" size="medium" alternative-text='loanIcon'></lightning-icon>
+            </div>
+            <div class="slds-media__body">
+                <h2 class="slds-card__header-title">
+                    <a href="javascript:void(0);" class="slds-card__header-link slds-truncate" >
+                        <span>{loanRec.LoanName}</span>
+                    </a>
+                </h2>
+            </div>
+            <div class="slds-media__figure" style="cursor:pointer">
+                <lightning-icon icon-name="standard:first_non_empty" size="medium" alternative-text='loanDelete' onclick={deleteComp} ></lightning-icon>
+            </div>
+        </header>
+    
+        <lightning-layout>
+            <lightning-layout-item class="itm">
+                <lightning-input required value="" data-id="LoanNumber"  label="Loan Number" title="Loan Number" placeholder="Loan Number"  type="text"></lightning-input>
+            </lightning-layout-item>
+            <lightning-layout-item class="itm">
+                <lightning-combobox required data-id="LoanType" label="Type" name="Type"  options={loanTypeOptions}></lightning-combobox>
+            </lightning-layout-item>
+            
+        </lightning-layout>
+        <lightning-layout>
+            
+            <lightning-layout-item class="itm">
+                <div style="display: flex;">
+                    <abbr title="required" class="slds-required">* </abbr> 
+                    <div style="width:100%;">
+                        <c-lookup-comp object-name="Account" data-id="LoanLender" display-name="Lender" filter="RecordType.Name-Finance" ></c-lookup-comp>
+                    </div>
+                </div>
+            </lightning-layout-item>
+            <lightning-layout-item class="itm">
+                <lightning-input type="date" data-id="LoanDefaultNotifyExpiryDate" name="Default Notice Expiry Date" label="Default Notice Expiry Date" ></lightning-input>
+            </lightning-layout-item>
+
+        </lightning-layout>
+
+       
+        
+        <lightning-layout>
+            <lightning-layout-item class="itm">
+                <lightning-input type="number" data-id="LoanAccountBalance" name="Account Balance" label="Account Balance" step="0.01"  formatter="currency"></lightning-input>
+            </lightning-layout-item>
+            <lightning-layout-item class="itm">
+                <lightning-input type="number" data-id="LoanAccountDue" name="Amount Due/Outstanding Amount" label="Amount Due/Outstanding Amount" step="0.01"  formatter="currency"></lightning-input>
+            </lightning-layout-item>
+        </lightning-layout>
+
+        <lightning-layout>
+            <lightning-layout-item class="itm">
+                <lightning-input type="date" data-id="LoanContractDate" name="Contract Date" label="Contract Date" ></lightning-input>
+            </lightning-layout-item>
+            <lightning-layout-item class="itm">
+                <lightning-input type="number" data-id="LoanCurrentArrears" name="Current Arrears" label="Current Arrears" step="0.01"  formatter="currency"></lightning-input>
+            </lightning-layout-item>
+        </lightning-layout>
+
+        <lightning-layout>
+            <lightning-layout-item class="itm">
+                <lightning-input type="number" data-id="LoanCurrentPayout" name="Current Payout" label="Current Payout" step="0.01" formatter="currency"></lightning-input>
+            </lightning-layout-item>
+            <lightning-layout-item class="itm">
+                <lightning-combobox data-id="LoanInstallmentFrequency" label="Installment Frequency" name="Installment Frequency" value="Monthly" options={loanInstallmentFrequencyOptions}></lightning-combobox>
+            </lightning-layout-item>
+        </lightning-layout>
+
+        <lightning-layout>
+            <lightning-layout-item class="itm">
+                <lightning-input type="number" data-id="LoanInstallmentAmount" name="Installment Amount" label="Installment Amount" step="0.01"  formatter="currency"></lightning-input>
+            </lightning-layout-item>
+            <lightning-layout-item class="itm">
+                <lightning-combobox data-id="LoanInterestType" label="Interest Type" value="Fixed" name="Intrest Type"  options={loanIntrestTypeOptions}></lightning-combobox>
+            </lightning-layout-item>
+        </lightning-layout>
+
+        <lightning-layout>
+            <lightning-layout-item class="itm">
+                <lightning-input type="date" data-id="LoanNextInstallmentDate" name="Next Installment Date" label="Next Installment Date" ></lightning-input>
+            </lightning-layout-item>
+            <lightning-layout-item class="itm">
+                <lightning-input type="date" data-id="LoanMaturityDate" name="Maturity Date	" label="Maturity Date	" ></lightning-input>
+            </lightning-layout-item>
+        </lightning-layout>
+
+        <lightning-layout>
+            <lightning-layout-item class="itm">
+                <lightning-input type="number" data-id="LoanAmount" name="Loan Amount" label="Loan Amount" step="0.01"  formatter="currency"></lightning-input>
+            </lightning-layout-item>
+            <lightning-layout-item class="itm">
+                <lightning-input type="number" data-id="LoanRateofInterest" name="Rate of Interest" label="Rate of Interest" step="0.01"  formatter="percent"></lightning-input>
+            </lightning-layout-item>
+        </lightning-layout>
+
+        <lightning-layout>
+            <lightning-layout-item class="itm">
+                <lightning-input type="date" data-id="LoanPayoutDueDate" name="Payout Due Date" label="Payout Due Date" ></lightning-input>
+            </lightning-layout-item>
+            <lightning-layout-item class="itm">
+                <lightning-input type="number" data-id="LoanLastInstalmentAmount" name="Last Instalment Amount" label="Last Instalment Amount" step="0.01"  formatter="currency"></lightning-input>
+            </lightning-layout-item>
+        </lightning-layout>
+
+        <lightning-layout>
+            <lightning-layout-item class="itm">
+                <lightning-input type="date" data-id="LoanLastInstalmentPaid" name="Last Instalment Paid" label="Last Instalment Paid" ></lightning-input>
+            </lightning-layout-item>
+            <lightning-layout-item class="itm"></lightning-layout-item>
+        </lightning-layout>
+
+
+    <div class="slds-align_absolute-center" style="margin: 1em 0 1em 0;background: #f9f9f9;padding: 1em;">
+        <lightning-button variant="brand" label="New Loan Contact" title="New Loan" onclick={createNewLoanContact} class="slds-m-left_x-small"></lightning-button>
+        <lightning-button variant="brand" label="New Asset" title="New Asset" onclick={createNewAsset} class="slds-m-left_x-small"></lightning-button>
+    </div>
+
+    <lightning-layout style="margin:1em 0 1em 0"> 
+       
+        <lightning-layout-item class="itm">
+            <template for:each={LoanContactArr} for:item="loanContact">
+                <c-loan-contact-comp key={loanContact.LoanContactId} data-id={loanContact.LoanContactId} loan-contact-role-options={loanContactRoleOptions} loan-contact={loanContact} onremoveloancontact={deleteLoanContact} go-data={goData} go-bol={goBol}></c-loan-contact-comp>
+            </template>
+        </lightning-layout-item>
+        <lightning-layout-item class="itm">
+            <template for:each={AssetArr} for:item="asset">
+                <c-asset-comp key={asset.AssetId} data-id={asset.AssetId} asset={asset} asset-record-type-options={assetRecordTypeOptions} onremoveasset={deleteAsset}></c-asset-comp>
+            </template>
+        </lightning-layout-item>
+    </lightning-layout>
+</template>
+    
+</template>
